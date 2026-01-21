@@ -20,9 +20,9 @@ PROVIDES = "barton-matter"
 RPROVIDES_${PN} = "barton-matter"
 
 SRC_URI = "git://github.com/project-chip/connectedhomeip.git;protocol=https;name=barton-matter;nobranch=1"
-SRC_URI += "file://0001-Fix-reading-ExtendedAddress-from-otbr-agent-39723.patch"
-SRC_URI += "file://0002-Patch-out-visibility-restriction.patch"
-SRC_URI += "file://0003-Disable-pigweed-venv-generation-because-of-codegen.patch"
+SRC_URI += "file://matter_1.4/0001-Fix-reading-ExtendedAddress-from-otbr-agent-39723.patch"
+SRC_URI += "file://matter_1.4/0002-Patch-out-visibility-restriction.patch"
+SRC_URI += "file://matter_1.4/0003-Disable-pigweed-venv-generation-because-of-codegen.patch"
 
 # CRITICAL VERSION NOTICE:
 # Matter SDK version: 1.4.2
@@ -35,7 +35,7 @@ SRC_URI += "file://0003-Disable-pigweed-venv-generation-because-of-codegen.patch
 # Always coordinate Matter and Barton version updates to maintain compatibility.
 SRCREV = "06523c22640ceb8b89f9a11ff2325a4481a178a3"
 S = "${WORKDIR}/git"
-PR="r0"
+PR="r1"
 
 inherit cmake pkgconfig python3native
 
@@ -95,7 +95,7 @@ addtask check_matter_configuration before do_configure
 
 do_configure:prepend() {
     mkdir -p ${S}/third_party/barton
-    cp -r ${THISDIR}/files/. ${S}/third_party/barton/
+    cp -r ${THISDIR}/files/matter_1.4/. ${S}/third_party/barton/
 
     # Copy the client's Matter configuration files provided in the bbappend
     cp ${MATTER_ZAP_FILE} ${S}/third_party/barton/

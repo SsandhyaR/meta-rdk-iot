@@ -12,8 +12,8 @@ the base Barton Matter integration. It demonstrates how to provide custom ZAP
 files, pregenerated Matter source code, and other product-specific files needed
 to enable Matter device support through the Barton IoT Platform.
 
-To properly implement Matter with Barton, please follow the instructions in the 
-`Pregenerated Code` section of the [Usage Guidelines](#usage-guidelines). This 
+To properly implement Matter with Barton, please follow the instructions in the
+`Pregenerated Code` section of the [Usage Guidelines](#usage-guidelines). This
 step is critical for successful integration.
 
 ### Building Matter in RDK Yocto
@@ -66,7 +66,7 @@ script directly. Therefore, code generation from your ZAP file must happen
 before the build process begins. This "pregeneration" step creates the required
 `zzz_generated` directory containing all Matter-generated code needed for
 successful compilation. To streamline this process, helper scripts are included
-in the `files/scripts` directory.
+in the `files/matter_1.4/scripts` directory.
 
 After creating or updating your ZAP file to define your Matter configuration,
 ensure your Barton Matter recipe has the following structure:
@@ -83,7 +83,7 @@ Then run the `generate_zzz.sh` script and pass the path to your zap file as the
 first argument:
 
 ```bash
-files/scripts/generate_zzz.sh /path/to/your-layer/your-barton-matter-recipe/files/your-zap-file.zap
+files/matter_1.4/scripts/generate_zzz.sh /path/to/your-layer/your-barton-matter-recipe/files/your-zap-file.zap
 ```
 
 This will generate the zzz_generated.tar.gz file in the files/ directory containing
