@@ -17,7 +17,7 @@ PROVIDES = "barton-matter"
 RPROVIDES_${PN} = "barton-matter"
 
 SRC_URI = "git://github.com/project-chip/connectedhomeip.git;protocol=https;name=barton-matter;nobranch=1"
-SRC_URI += "file://0001-Fix-GetPrimary802154MACAddress-on-Linux-platform.patch"
+SRC_URI += "file://matter_1.4/0001-Fix-GetPrimary802154MACAddress-on-Linux-platform.patch"
 
 # CRITICAL VERSION NOTICE:
 # Matter SDK version: 1.4.0
@@ -30,7 +30,7 @@ SRC_URI += "file://0001-Fix-GetPrimary802154MACAddress-on-Linux-platform.patch"
 # Always coordinate Matter and Barton version updates to maintain compatibility.
 SRCREV = "43aa98c2d30ee547c6b587b9de7bbb794f175ece"
 S = "${WORKDIR}/git"
-PR="r1"
+PR="r2"
 
 inherit cmake pkgconfig
 
@@ -84,7 +84,7 @@ addtask check_matter_configuration before do_configure
 
 do_configure:prepend() {
     mkdir -p ${S}/third_party/barton
-    cp -r ${THISDIR}/files/. ${S}/third_party/barton/
+    cp -r ${THISDIR}/files/matter_1.4/. ${S}/third_party/barton/
 
     # Copy the client's Matter configuration files provided in the bbappend
     cp ${MATTER_ZAP_FILE} ${S}/third_party/barton/
