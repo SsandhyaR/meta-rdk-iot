@@ -1,9 +1,4 @@
-#------------------------------ tabstop = 4 ----------------------------------
-#
-# If not stated otherwise in this file or this component's LICENSE file the
-# following copyright and licenses apply:
-#
-# Copyright 2026 Comcast Cable Communications Management, LLC
+# Copyright 2023 Comcast Cable Communications, LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,14 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#
-# SPDX-License-Identifier: Apache-2.0
-#
-#------------------------------ tabstop = 4 ----------------------------------
-
-#
-# Created by Christian Leithner on 1/29/2026.
-#
 
 import("//build_overrides/build.gni")
 
@@ -33,6 +20,23 @@ buildconfig = "${build_root}/config/BUILDCONFIG.gn"
 # CHIP uses angle bracket includes.
 check_system_includes = true
 
+script_executable = "python3"
+
 default_args = {
-  import("//args.gni")
+    target_os = "linux"
+    chip_system_config_locking = "posix"
+    chip_stack_lock_tracking = "fatal"
+    chip_mdns = "minimal"
+    chip_code_pre_generated_directory = "//third_party/barton/zzz_generated"
+    chip_device_platform = "linux"
+    chip_build_tools = false
+    chip_build_tests = false
+    chip_enable_ble = true
+    chip_enable_openthread = true
+    chip_enable_wifi = false
+    chip_inet_config_enable_ipv4 = false
+    chip_system_config_use_lwip = false
+    chip_system_config_use_sockets = true
+    chip_with_lwip = false
+    ehable_rtti = true
 }
