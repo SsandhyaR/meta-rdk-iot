@@ -13,3 +13,5 @@ MATTER_IDL_FILE = "${WORKDIR}/barton.matter"
 
 # Set persistent storage location for production use
 MATTER_CONF_DIR = "/tmp/barton-matter-example"
+
+PR:append := ".1"
