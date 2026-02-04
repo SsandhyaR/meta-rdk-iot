@@ -4,7 +4,7 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
 
 # CRITICAL VERSION NOTICE:
-# Matter SDK version: 1.5.0.1
+# Matter SDK version: v1.5-branch
 #
 # This specific Matter SDK commit has been tested and validated with Barton.
 # The Barton and Matter SDK versions are tightly coupled. Updating either component
@@ -12,28 +12,30 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
 #  - Updating this SRCREV may break Barton integration
 #  - Updating Barton may require a corresponding Matter SDK version change
 # Always coordinate Matter and Barton version updates to maintain compatibility.
-SRCREV = "91f770ad97d7f80435f53b9c8842b3d5bbcc2644"
+SRCREV = "4564cd2e0a0c7059bb99719cfc3de50cefac5d10"
 
-SRC_URI = "git://github.com/project-chip/connectedhomeip.git;protocol=https;branch=master;destsuffix=git;depth=1 \
-          file://matter_1.5.0.1/0001-pigweed-skip-upgrade-symlink-pip.patch \
-          file://matter_1.5.0.1/0002-skip-bluezoo-python-version.patch \
-          file://matter_1.5.0.1/0003-pigweed-fix-gn-venv-creation-for-yocto.patch \
-          file://matter_1.5.0.1/0004-pigweed-enable-system-site-packages.patch;patchdir=third_party/pigweed/repo \
-          file://matter_1.5.0.1/0005-add-watchdog-to-build-requirements.patch \
-          file://matter_1.5.0.1/0006-pigweed-use-legacy-pip-resolver.patch;patchdir=third_party/pigweed/repo \
-          file://matter_1.5.0.1/0007-bootstrap-handle-tput-errors-gracefully.patch \
-          file://matter_1.5.0.1/0008-fix-bash-completion-compatibility.patch \
-          file://matter_1.5.0.1/0010-codegen-add-python-3.10-compatibility.patch \
+SRC_URI = "git://github.com/project-chip/connectedhomeip.git;protocol=https;branch=v1.5-branch;destsuffix=git;depth=1 \
+          file://0001-pigweed-skip-upgrade-symlink-pip.patch \
+          file://0002-skip-bluezoo-python-version.patch \
+          file://0003-pigweed-fix-gn-venv-creation-for-yocto.patch \
+          file://0004-pigweed-enable-system-site-packages.patch;patchdir=third_party/pigweed/repo \
+          file://0005-add-watchdog-to-build-requirements.patch \
+          file://0006-pigweed-use-legacy-pip-resolver.patch;patchdir=third_party/pigweed/repo \
+          file://0007-bootstrap-handle-tput-errors-gracefully.patch \
+          file://0008-fix-bash-completion-compatibility.patch \
           "
 
 # Conditionally add setuptools upgrade patch for Yocto versions with setuptools < 64.0.0
 # This includes Kirkstone (4.0) and earlier. Scarthgap (5.0) and later have setuptools >= 69.0.0.
-SETUPTOOLS_UPGRADE_PATCH = "file://matter_1.5.0.1/0009-pigweed-upgrade-setuptools-for-yocto.patch;patchdir=third_party/pigweed/repo"
+SETUPTOOLS_UPGRADE_PATCH = "file://0009-pigweed-upgrade-setuptools-for-yocto.patch;patchdir=third_party/pigweed/repo"
 SRC_URI:append = "${@' ${SETUPTOOLS_UPGRADE_PATCH}' if d.getVar('DISTRO_VERSION') and bb.utils.vercmp_string(d.getVar('DISTRO_VERSION'), '5.0') < 0 else ''}"
 
 S = "${WORKDIR}/git"
 B = "${WORKDIR}/build"
-PR = "r1"
+PR = "r0"
+
+BPV = "1.5.0.1"
+PV = "${BPV}+git"
 
 DEPENDS:append = " \
     curl-native \
